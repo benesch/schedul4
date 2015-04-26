@@ -1,0 +1,5 @@
+config APP_IPCBENCH
+    bool "ipcbench CAmkES application"
+    default n
+    help
+        An application to benchmark IPC in seL4.

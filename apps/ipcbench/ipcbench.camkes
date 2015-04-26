@@ -1,0 +1,28 @@
+import <std_connector.camkes>;
+
+component Ping {
+  control;
+  include "ipcbench.h";
+  dataport UnsignedInteger data;
+  emits Ping ping_ev;
+  consumes Pong pong_ev;
+}
+
+component Pong {
+  control;
+  include "ipcbench.h";
+  dataport UnsignedInteger data;
+  consumes Ping ping_ev;
+  emits Pong pong_ev;
+}
+
+assembly {
+  composition {
+    component Ping ping;
+    component Pong pong;
+
+    connection seL4Asynch pingEvent(from ping.ping_ev, to pong.ping_ev);
+    connection seL4Asynch pongEvent(from pong.pong_ev, to ping.pong_ev);
+    connection seL4SharedData channel(from ping.data, to pong.data);
+  }
+}
