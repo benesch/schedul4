@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #define NITERATIONS     (1 << 30)
-#define PRINT_INTERVAL  (1 << 20)
+#define PRINT_INTERVAL  (1 << 25)
 
 int run(void) {
   for (volatile int i = 0; i < NITERATIONS; i++) {
