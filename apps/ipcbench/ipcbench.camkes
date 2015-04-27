@@ -16,10 +16,15 @@ component Pong {
   emits Pong pong_ev;
 }
 
+component Guzzle {
+  control;
+}
+
 assembly {
   composition {
     component Ping ping;
     component Pong pong;
+    component Guzzle guzzle;
 
     connection seL4Asynch pingEvent(from ping.ping_ev, to pong.ping_ev);
     connection seL4Asynch pongEvent(from pong.pong_ev, to ping.pong_ev);
